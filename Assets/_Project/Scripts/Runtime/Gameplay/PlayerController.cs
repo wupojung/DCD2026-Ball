@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI winText;
     public int targetScore = 4;
 
+    public AudioClip 收集音效;
+    public AudioClip Win音效;
+    public AudioSource  audioSource;
 
     void Awake()
     {
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("PickUp"))
         {
             score++;
+            audioSource.PlayOneShot(收集音效);
 
             UpdateScoreUI();
             CheckWinCondition();
@@ -77,6 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (score >= targetScore)
         {
+            audioSource.PlayOneShot(Win音效);
             winText.gameObject.SetActive(true);
         }
     }
